@@ -15,10 +15,7 @@ function [t,y,nfev] = integrer_edo(f,a,b,y0,N,methode)
             y(k+1)=yk+h*f(tk,yk);
             nfev=nfev+1;
         case "heun" then
-             k1=f(tk,yk); ybar=yk+h*k1; k2=f(tk+h,ybar); y(k+1)=yk+h/2*(k1+k2);
-            nfev=nfev+2;
-        case "rk4" then
-            k1=f(tk,yk); k2=f(tk+h/2,yk+h*k1/2); k3=f(tk+h/2,yk+h*k2/2); k4=f(tk+h,yk+h*k3); yk+1=yk+h/6(k1+2*k2+2*k3+k4);
+             k yk+1=yk+h/6(k1+2*k2+2*k3+k4);
             nfev=nfev+4;
         else
             error("Methode inconnue : euler, heun ou rk4 attendue");

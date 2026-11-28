@@ -31,10 +31,29 @@ k2 = f(tk+h,predicteur);
 y(k+1) = yk + h*(k1+k2)/2;
 
 nfev = nfev + 2;
-        case "rk4" then
-            // TODO R : calculer les quatre pentes et y(k+1).
-            error("TODO R : completer RK4 avant de le lancer");
-            nfev=nfev+4;
+       case "rk4" then
+    k1 = f(tk,yk);
+
+    k2 = f(tk+h/2,yk+h*k1/2);
+
+    k3 = f(tk+h/2,yk+h*k2/2);
+
+    k4 = f(tk+h,yk+h*k3);
+
+    y(k+1) = yk + h*(k1+2*k2+2*k3+k4)/6;
+
+    nfev = nfev + 4;
+k1 = f(tk,yk);
+
+k2 = f(tk+h/2, yk+h*k1/2);
+
+k3 = f(tk+h/2, yk+h*k2/2);
+
+k4 = f(tk+h, yk+h*k3);
+
+y(k+1) = yk + h*(k1 + 2*k2 + 2*k3 + k4)/6;
+
+nfev = nfev + 4;
         else
             error("Methode inconnue : euler, heun ou rk4 attendue");
         end

@@ -11,13 +11,26 @@ function [t,y,nfev] = integrer_edo(f,a,b,y0,N,methode)
     for k=1:N
         tk=t(k); yk=y(k);
         select methode
-        case "euler" then
-            y(k+1)=yk+h*f(tk,yk);
-            nfev=nfev+1;
-        case "heun" then
-            // TODO H : k1, predicteur, k2, puis y(k+1).
-            error("TODO H : completer Heun avant de le lancer");
-            nfev=nfev+2;
+       case "heun" then
+    k1 = f(tk,yk);
+
+    ypred = yk + h*k1;
+
+    k2 = f(tk+h,ypred);
+
+    y(k+1) = yk + h*(k1+k2)/2;
+
+    nfev = nfev + 2;
+// Heun
+k1 = f(tk,yk);
+
+predicteur = yk + h*k1;
+
+k2 = f(tk+h,predicteur);
+
+y(k+1) = yk + h*(k1+k2)/2;
+
+nfev = nfev + 2;
         case "rk4" then
             // TODO R : calculer les quatre pentes et y(k+1).
             error("TODO R : completer RK4 avant de le lancer");
